@@ -1,0 +1,47 @@
+INSERT INTO oauth_client_details (client_id, client_secret, web_server_redirect_uri, scope, access_token_validity, refresh_token_validity, resource_ids, authorized_grant_types, additional_information)
+ VALUES ('lms-client', '{bcrypt}$2y$12$QK7UJY8RagRoMNmiCbXvT.Cu8jHvcjPZaTZRXkkNQjKxUE6wIMX0m', 'http://localhost:8080/login', 'READ,WRITE', '3600', '10000', 'inventory,payment', 'authorization_code,password,refresh_token,implicit', '{}');
+--web-customer
+
+ INSERT INTO permission (NAME) VALUES
+ ('create'),
+ ('update'),
+ ('delete'),
+ ('view'),
+ ('authorize_create'),
+ ('authorize_update'),
+ ('authorize_delete');
+
+ INSERT INTO role (NAME) VALUES
+		('ROLE_Admin'),
+		('ROLE_User'),
+		('ROLE_Lecture'),
+		('ROLE_Registerer'),
+		('ROLE_Student');
+
+ INSERT INTO permission_role (PERMISSION_ID, ROLE_ID) VALUES
+     (1,1), /*create-> admin */
+     (2,1), /* update admin */
+     (3,1), /* delete admin */
+     (4,1), /* view admin */
+     (5,1), /* authorize_create-> admin */
+     (6,1), /* authorize_update admin */
+     (7,1), /* authorize_delete admin */
+     (2,2),  /* read operator */
+     (3,2);  /* update operator */
+insert into customer (id, username,password,
+--email,
+enabled, accountNonExpired, credentialsNonExpired, accountNonLocked)
+ VALUES ('1', 'Admin','{bcrypt}$2y$12$bj3Z8dqJdZxOAa.EEB/fU..BhgW0WiWQTjl9NDRu6BK8uHEYmbOX6',
+  --'admin@zealot.com',
+  '1', '1', '1', '1');
+insert into  customer (id, username,password,
+--email,
+enabled, accountNonExpired, credentialsNonExpired, accountNonLocked)
+ VALUES ('2', 'Alex', '{bcrypt}$2y$12$bj3Z8dqJdZxOAa.EEB/fU..BhgW0WiWQTjl9NDRu6BK8uHEYmbOX6',
+ --'alex@test.com',
+ '1', '1', '1', '1');
+
+INSERT INTO role_user (ROLE_ID, USER_ID)
+    VALUES
+    (1, 1) /* admin */,
+    (2, 2) /* customer */ ;
